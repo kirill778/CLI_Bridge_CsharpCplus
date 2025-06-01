@@ -1,0 +1,44 @@
+# CalculatorSolution
+
+Многоуровневый калькулятор на C# и C++ (CalculatorApp + CalculatorCore)
+
+## Структура проекта
+- **CalculatorApp** — графическое приложение на C# (WinUI)
+- **CalculatorCore** — нативная DLL на C++ (логика вычислений)
+
+## Сборка и запуск
+1. Откройте решение `CalculatorSolution.sln` в Visual Studio.
+2. Постройте проект `CalculatorCore` (Release или Debug, x64).
+3. Постройте и запустите проект `CalculatorApp` (x64, тот же конфиг).
+4. Убедитесь, что `CalculatorCore.dll` скопирован в папку с .exe приложения (обычно `CalculatorApp/bin/x64/Debug/net8.0-windows10.0.19041.0/win-x64/`).
+
+## Возможные ошибки
+- **Unable to load DLL 'CalculatorCore.dll'** — проверьте, что DLL и все её зависимости присутствуют, архитектура совпадает, установлен Visual C++ Redistributable.
+
+## Игнорируемые файлы
+См. `.gitignore` для исключения временных, сборочных и пользовательских файлов.
+
+## Разворачивание на другом ПК
+
+1. **Клонируйте репозиторий:**
+   ```
+   git clone <адрес-репозитория>
+   ```
+2. **Установите ПО:**
+   - Visual Studio 2022 или новее (с рабочими нагрузками .NET Desktop и Desktop development with C++)
+   - .NET 8.0 SDK
+   - Windows 10 SDK (10.0.19041.0 или новее)
+   - [Microsoft Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+3. **Откройте решение `CalculatorSolution.sln` в Visual Studio.**
+4. **Постройте проект `CalculatorCore` (x64, Debug или Release).**
+5. **Постройте и запустите проект `CalculatorApp` (x64, тот же конфиг).**
+6. **Убедитесь, что файл `CalculatorCore.dll` находится в папке с исполняемым файлом приложения:**
+   - Обычно: `CalculatorApp/bin/x64/Debug/net8.0-windows10.0.19041.0/win-x64/`
+7. **Если приложение не запускается и появляется ошибка о невозможности загрузить DLL:**
+   - Проверьте, что установлены все зависимости (см. выше)
+   - Проверьте архитектуру (x64/x86)
+   - Проверьте, что все необходимые DLL скопированы
+
+**Для конечных пользователей:**
+- Для публикации используйте функцию Publish в Visual Studio (Single file, self-contained, либо с установщиком).
+- Не забудьте включить все нативные DLL и зависимости в дистрибутив. 
