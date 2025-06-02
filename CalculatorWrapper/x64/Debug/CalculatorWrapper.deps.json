@@ -1,0 +1,26 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "CalculatorWrapper/1.0.0": {
+        "dependencies": {
+          "CalculatorCore": "1.0.0"
+        },
+        "runtime": {
+          "CalculatorWrapper.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CalculatorWrapper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

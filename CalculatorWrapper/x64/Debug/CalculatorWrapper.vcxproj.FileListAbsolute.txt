@@ -1,0 +1,9 @@
+D:\pet\WINUI3C-C-\x64\Debug\Ijwhost.dll
+D:\pet\WINUI3C-C-\x64\Debug\CalculatorWrapper.deps.json
+D:\pet\WINUI3C-C-\x64\Debug\CalculatorWrapper.runtimeconfig.json
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\CalculatorWrapper.sourcelink.json
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\CalculatorWrapper.genruntimeconfig.cache
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\Ijwhost.dll
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\CalculatorWrapper.dll
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\CalculatorWrapper.deps.json
+D:\pet\WINUI3C-C-\CalculatorWrapper\x64\Debug\CalculatorWrapper.runtimeconfig.json

@@ -13,6 +13,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<!-- Другие элементы ... -->
+		<Content Include="$(SolutionDir)CalculatorCore\$(Platform)\$(Configuration)\CalculatorCore.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<TargetPath>CalculatorCore.dll</TargetPath>
+			<!-- Указываем, как файл будет называться в AppX -->
+			<Pack>true</Pack>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -40,9 +51,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250513003" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="CalculatorCore.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\CalculatorWrapper\CalculatorWrapper.vcxproj" />
   </ItemGroup>
 
   <!--

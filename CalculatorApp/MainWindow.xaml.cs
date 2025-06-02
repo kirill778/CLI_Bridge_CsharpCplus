@@ -1,24 +1,17 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using System.Runtime.InteropServices; // Важно: для DllImport
+// using System.Runtime.InteropServices; // Этот using теперь не нужен
+
+// Добавьте это:
+using CalculatorWrapper; // Добавляем пространство имен нашей C++/CLI обертки
 
 namespace CalculatorApp
 {
     public sealed partial class MainWindow : Window
     {
-        // Объявляем импортированные функции из нашей C++ DLL
-        [DllImport("CalculatorCore.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern double Add(double a, double b);
-
-        [DllImport("CalculatorCore.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern double Subtract(double a, double b);
-
-        [DllImport("CalculatorCore.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern double Multiply(double a, double b);
-
-        [DllImport("CalculatorCore.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern double Divide(double a, double b);
+        // Создаем экземпляр нашего C++/CLI калькулятора
+        private Calculator _calculator = new Calculator(); // Создаем экземпляр обертки
 
         public MainWindow()
         {
@@ -28,35 +21,33 @@ namespace CalculatorApp
 
         private void OperationButton_Click(object sender, RoutedEventArgs e)
         {
-            // Очищаем предыдущие ошибки
             ErrorTextBlock.Text = string.Empty;
             ResultTextBlock.Text = "Результат: ";
 
             if (sender is Button clickedButton)
             {
-                // Пытаемся получить числа из текстовых полей
                 if (double.TryParse(Number1TextBox.Text, out double num1) &&
                     double.TryParse(Number2TextBox.Text, out double num2))
                 {
                     double result = 0;
                     bool success = true;
-                    string operation = clickedButton.Tag.ToString(); // Получаем операцию из Tag кнопки
+                    string operation = clickedButton.Tag.ToString();
 
                     try
                     {
                         switch (operation)
                         {
                             case "Add":
-                                result = Add(num1, num2); // Вызов C++ функции
+                                result = _calculator.Add(num1, num2); // Вызываем метод обертки
                                 break;
                             case "Subtract":
-                                result = Subtract(num1, num2); // Вызов C++ функции
+                                result = _calculator.Subtract(num1, num2); // Вызываем метод обертки
                                 break;
                             case "Multiply":
-                                result = Multiply(num1, num2); // Вызов C++ функции
+                                result = _calculator.Multiply(num1, num2); // Вызываем метод обертки
                                 break;
                             case "Divide":
-                                result = Divide(num1, num2); // Вызов C++ функции (может выбросить исключение)
+                                result = _calculator.Divide(num1, num2); // Вызываем метод обертки
                                 break;
                             default:
                                 success = false;
@@ -64,14 +55,7 @@ namespace CalculatorApp
                                 break;
                         }
                     }
-                    catch (COMException ex) // Обработка исключений, выброшенных из C++ DLL
-                    {
-                        // COMException может быть выброшен, если неуправляемый код вызывает ошибку.
-                        // В нашем случае, std::runtime_error из C++ может быть перехвачен как COMException.
-                        ErrorTextBlock.Text = $"Ошибка C++: {ex.Message}";
-                        success = false;
-                    }
-                    catch (Exception ex) // Общая обработка других исключений
+                    catch (Exception ex) // Теперь мы ловим обычное .NET исключение из C++/CLI
                     {
                         ErrorTextBlock.Text = $"Произошла ошибка: {ex.Message}";
                         success = false;
